@@ -1,0 +1,151 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.yomiolatunji.andela.lagosjavadev.data.model.User" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/content_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.yomiolatunji.andela.lagosjavadev.ui.UserDetailFragment">
+
+        <FrameLayout
+            android:id="@+id/content_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_light"
+                android:elevation="@dimen/z_card" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar"
+                android:layout_width="@dimen/large_avatar_size"
+                android:layout_height="@dimen/large_avatar_size"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/avatar_margin"
+                android:layout_marginTop="@dimen/large_avatar_margin"
+                android:elevation="@dimen/z_card"
+                android:padding="@dimen/avatar_padding"
+                android:transitionName="@string/transition_user_avatar"
+                app:srcCompat="@drawable/ic_person_outline" />
+
+            <LinearLayout
+                android:id="@+id/user_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:elevation="@dimen/z_card"
+                android:orientation="vertical"
+                android:transitionGroup="false">
+
+                <!-- spacer for avatar, see above -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/large_avatar_height" />
+
+                <TextView
+                    android:id="@+id/user_name"
+                    style="@style/Base.TextAppearance.AppCompat.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:paddingBottom="@dimen/spacing_normal"
+                    android:paddingEnd="@dimen/padding_normal"
+                    android:paddingStart="@dimen/padding_normal"
+                    android:text="@{user.name}"
+                    tools:text="Olatunji Yomi" />
+
+                <TextView
+                    android:id="@+id/username"
+                    style="@style/Base.TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:paddingEnd="@dimen/padding_normal"
+                    android:paddingStart="@dimen/padding_normal"
+                    android:text="@{user.login}"
+                    tools:text="yomiolatunji" />
+
+                <TextView
+                    android:id="@+id/user_url"
+                    style="@style/Base.TextAppearance.AppCompat.Body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:gravity="center_horizontal"
+                    android:paddingBottom="@dimen/spacing_normal"
+                    android:paddingEnd="@dimen/padding_normal"
+                    android:paddingStart="@dimen/padding_normal"
+                    android:text="@{user.html_url}"
+                    tools:text="Olatunji Yomi" />
+
+                <TextView
+                    android:id="@+id/user_bio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:paddingBottom="@dimen/spacing_normal"
+                    android:paddingEnd="@dimen/padding_normal"
+                    android:paddingStart="@dimen/padding_normal"
+                    android:text="@{user.bio}"
+                    tools:text="yomiolatunji" />
+                <!--style="@style/Widget.Personal.Title"-->
+
+                <ImageButton
+                    android:id="@+id/share"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/padding_normal"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:paddingBottom="@dimen/spacing_normal"
+                    android:paddingEnd="@dimen/padding_normal"
+                    android:paddingStart="@dimen/padding_normal"
+                    android:paddingTop="@dimen/spacing_normal"
+                    android:text="Share"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    app:srcCompat="@drawable/ic_share" />
+
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/colorPrimary"
+                    app:tabBackground="@color/colorPrimary"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="@android:color/white"
+                    app:tabMode="fixed"
+                    app:tabSelectedTextColor="@android:color/white"
+                    app:tabTextColor="@color/material_cyan_a200" />
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <include
+            android:id="@+id/load"
+            layout="@layout/loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="@dimen/spacing_huge" />
+
+    </FrameLayout>
+</layout>

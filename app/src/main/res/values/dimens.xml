@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="item_width">300dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    <!-- standard metrics -->
+    <dimen name="spacing_normal">8dp</dimen>
+    <dimen name="spacing_micro">4dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
+    <dimen name="spacing_large">32dp</dimen>
+    <dimen name="spacing_huge">64dp</dimen>
+    <dimen name="z_card">2dp</dimen>
+
+    <!--developers list-->
+    <dimen name="avatar_bounds">48dp</dimen>
+    <dimen name="avatar_padding">4dp</dimen>
+    <dimen name="avatar_margin">12dp</dimen>
+
+    <dimen name="large_avatar_size">120dp</dimen> <!-- 2 * actionBarSize - 2 * avatar_padding -->
+    <dimen name="large_avatar_margin">28dp</dimen> <!-- spacing_large - avatar_padding -->
+    <dimen name="large_avatar_height">160dp</dimen>
+
+</resources>

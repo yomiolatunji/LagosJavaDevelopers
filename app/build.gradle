@@ -1,0 +1,60 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.yomiolatunji.andela.lagosjavadev"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding.enabled = true
+}
+ext {
+    supportLibraryVersion = '25.1.0'
+    okHttpVersion = '3.4.2'
+    okHttp3DownloaderVersion = '1.1.0'
+    retrofitVersion = '2.2.0'
+    gsonVersion = '2.8.0'
+    picassoVersion = '2.5.2'
+    firebaseVersion = '10.0.1'
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    //support library
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+    compile "com.android.support:design:$supportLibraryVersion"
+    compile "com.android.support:support-v4:$supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$supportLibraryVersion"
+    compile "com.android.support:palette-v7:$supportLibraryVersion"
+    compile "com.android.support:customtabs:$supportLibraryVersion"
+
+    //Network and image processing
+    compile "com.squareup.okhttp3:okhttp-urlconnection:$okHttpVersion"
+    compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    compile "com.squareup.picasso:picasso:$picassoVersion"
+    compile "com.jakewharton.picasso:picasso2-okhttp3-downloader:$okHttp3DownloaderVersion"
+    compile "com.google.code.gson:gson:$gsonVersion"
+
+    //firebase
+    //compile "com.google.firebase:firebase-core:$firebaseVersion"
+    //compile "com.google.firebase:firebase-crash:$firebaseVersion"
+
+    //Widget
+    compile 'de.hdodenhof:circleimageview:2.0.0'
+
+    testCompile 'junit:junit:4.12'
+}
