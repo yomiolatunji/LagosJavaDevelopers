@@ -36,7 +36,6 @@ public class UserDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        showLoading(true);
         if (getArguments().containsKey(ARG_USERNAME)) {
             loadUser(getArguments().getString(ARG_USERNAME));
 
@@ -58,6 +57,7 @@ public class UserDetailFragment extends Fragment {
 //        if (mItem != null) {
 //            ((TextView) rootView.findViewById(R.id.user_detail)).setText(mItem.details);
 //        }
+        //showLoading(true);
 
         return binding.getRoot();
     }
@@ -125,10 +125,10 @@ public class UserDetailFragment extends Fragment {
     private void showLoading(boolean b){
         if(b){
             binding.load.setVisibility(View.VISIBLE);
-            binding.contentWrapper.setVisibility(View.GONE);
+            //binding.contentWrapper.setVisibility(View.GONE);
         }else{
             binding.load.setVisibility(View.GONE);
-            binding.contentWrapper.setVisibility(View.VISIBLE);
+            //binding.contentWrapper.setVisibility(View.VISIBLE);
         }
     }
 }

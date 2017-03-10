@@ -108,7 +108,7 @@ public class LagosJavaDevsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 } else {
                     Context context = v.getContext();
                     Intent intent = new Intent(context, UserDetailActivity.class);
-                    intent.putExtra(UserDetailFragment.ARG_USERNAME, holder.user.id);
+                    intent.putExtra(UserDetailFragment.ARG_USERNAME, holder.user.login);
                     ActivityOptions options =null;
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                         options = ActivityOptions.makeSceneTransitionAnimation((Activity) context,

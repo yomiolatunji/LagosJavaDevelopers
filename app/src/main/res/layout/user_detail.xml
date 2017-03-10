@@ -16,11 +16,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="com.yomiolatunji.andela.lagosjavadev.ui.UserDetailFragment">
 
-        <FrameLayout
-            android:id="@+id/content_wrapper"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <View
                 android:id="@+id/background"
                 android:layout_width="match_parent"
@@ -137,8 +132,6 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
 
-        </FrameLayout>
-
         <include
             android:id="@+id/load"
             layout="@layout/loading"
@@ -146,6 +139,5 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
             android:layout_margin="@dimen/spacing_huge" />
-
     </FrameLayout>
 </layout>

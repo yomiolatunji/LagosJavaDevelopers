@@ -174,15 +174,16 @@ public class GithubApiNetworkService {
     class GetUser extends AsyncTask<Void, Void, Void> {
         private String url;
         private DataLoadingCallback<User> callback;
+        User.Builder builder;
 
         public GetUser(String url, DataLoadingCallback<User> callback) {
             this.url = url;
             this.callback = callback;
+            builder = new User.Builder();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-            User.Builder builder = new User.Builder();
             try {
                 String response = NetworkUtils.newInstance(mContext, OkHttpSingleton.getOkHttpClient()).get(url);
                 JSONObject userObject = new JSONObject(response);
@@ -245,11 +246,16 @@ public class GithubApiNetworkService {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            callback.onResponse(builder.build());
 
             return null;
         }
 
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            callback.onResponse(builder.build());
+        }
     }
 
 }
