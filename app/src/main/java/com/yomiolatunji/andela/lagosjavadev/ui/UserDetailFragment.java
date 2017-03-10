@@ -6,13 +6,9 @@ import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.TabLayout;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +21,8 @@ import com.yomiolatunji.andela.lagosjavadev.data.model.User;
 import com.yomiolatunji.andela.lagosjavadev.databinding.UserDetailBinding;
 import com.yomiolatunji.andela.lagosjavadev.ui.customtabs.CustomTabActivityHelper;
 
-import java.lang.reflect.Field;
 import java.text.MessageFormat;
+import java.text.NumberFormat;
 
 
 public class UserDetailFragment extends Fragment {
@@ -34,8 +30,6 @@ public class UserDetailFragment extends Fragment {
     public static final String ARG_USERNAME = "username";
     UserDetailBinding binding;
     User user;
-    private FragmentManager fragmentManager;
-    private UserPagerAdapter mUserPagerAdapter;
 
     public UserDetailFragment() {
     }
@@ -116,14 +110,28 @@ public class UserDetailFragment extends Fragment {
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share)));
             }
         });
-        fragmentManager = this.getChildFragmentManager();
-        if (mUserPagerAdapter == null)
-            mUserPagerAdapter = new UserPagerAdapter(fragmentManager,user.followers,user.following,user.publicRepos);
-        mUserPagerAdapter.notifyDataSetChanged();
-        // Set up the ViewPager with the sections adapter.
-        binding.viewPager.setAdapter(mUserPagerAdapter);
+        setFollowerCount();
+        setFollowingCount();
+        setRepoCount();
+    }
+    private void setFollowerCount() {
+        VectorDrawableCompat vectorDrawableCompat = VectorDrawableCompat.create(getResources(), R.drawable.ic_follower, null);
+        binding.followerCount.setCompoundDrawablesWithIntrinsicBounds(null, vectorDrawableCompat, null, null);
+        binding.followerCount.setText(getResources().getQuantityString(R.plurals.follower_count,
+                user.followers, NumberFormat.getInstance().format(user.followers)));
 
-        binding.tab.setupWithViewPager(binding.viewPager);
+    }private void setFollowingCount() {
+        VectorDrawableCompat vectorDrawableCompat = VectorDrawableCompat.create(getResources(), R.drawable.ic_following, null);
+        binding.followingCount.setCompoundDrawablesWithIntrinsicBounds(null, vectorDrawableCompat, null, null);
+        binding.followingCount.setText(getResources().getQuantityString(R.plurals.following_count,
+                user.following, NumberFormat.getInstance().format(user.following)));
+
+    }private void setRepoCount() {
+        VectorDrawableCompat vectorDrawableCompat = VectorDrawableCompat.create(getResources(), R.drawable.ic_repo, null);
+        binding.repoCount.setCompoundDrawablesWithIntrinsicBounds(null, vectorDrawableCompat, null, null);
+        binding.repoCount.setText(getResources().getQuantityString(R.plurals.repo_count,
+                user.publicRepos, NumberFormat.getInstance().format(user.publicRepos)));
+
     }
 
     private void openLink(String url) {
@@ -136,73 +144,13 @@ public class UserDetailFragment extends Fragment {
                 Uri.parse(url));
     }
 
-    private void showLoading(boolean b){
-        if(b){
-           // binding.load.setVisibility(View.VISIBLE);
+    private void showLoading(boolean b) {
+        if (b) {
+            // binding.load.setVisibility(View.VISIBLE);
             //binding.contentWrapper.setVisibility(View.GONE);
-        }else{
+        } else {
             //binding.load.setVisibility(View.GONE);
             //binding.contentWrapper.setVisibility(View.VISIBLE);
-        }
-    }
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        try {
-            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-            childFragmentManager.setAccessible(true);
-            childFragmentManager.set(this, null);
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public class UserPagerAdapter extends FragmentPagerAdapter {
-        private int followerCount;
-        private int followingCount;
-        private int repoCount;
-
-        public UserPagerAdapter(FragmentManager fm, int followerCount, int followingCount, int repoCount) {
-            super(fm);
-            this.followerCount = followerCount;
-            this.followingCount = followingCount;
-            this.repoCount = repoCount;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            Bundle arguments = new Bundle();
-            arguments.putString(UserDetailFragment.ARG_USERNAME, user.login);
-            FollowersFragment followersFragment = new FollowersFragment();
-            followersFragment.setArguments(arguments);
-            switch (position) {
-                case 0:
-                    return followersFragment;
-                case 1:
-                    return followersFragment;
-                case 2:
-                    return followersFragment;
-            }
-            return null;
-        }
-
-        @Override
-        public int getCount() {
-            return 3;
-        }
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return followerCount+" Followers";
-                case 1:
-                    return followingCount+" Following";
-                case 2:
-                    return repoCount+" Repos";
-            }
-            return "";
         }
     }
 }

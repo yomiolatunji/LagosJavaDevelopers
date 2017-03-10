@@ -5,7 +5,12 @@
     <color name="colorAccent">@color/material_deeporange_a400</color>
 
     <!-- common colours -->
-    <color name="text_primary_dark">#de000000</color>
+    <color name="text_primary_dark">#de000000</color> <!-- 87% -->
+    <color name="text_secondary_dark">#8a000000</color> <!-- 54% -->
+    <color name="text_tertiary_dark">#61000000</color> <!-- 38% -->
+    <color name="text_primary_light">#ffffffff</color>
+    <color name="text_secondary_light">#b3ffffff</color> <!-- 70% -->
+    <color name="text_disabled_light">#4dffffff</color> <!-- 30% -->
     <color name="background_light">#fafafa</color>
     <color name="mid_grey">#40808080</color>
     <color name="grey_300">#ffe0e0e0</color>

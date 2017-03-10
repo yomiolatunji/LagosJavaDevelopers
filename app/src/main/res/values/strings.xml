@@ -4,4 +4,20 @@
     <string name="transition_user_avatar">transition user avatar</string>
     <string name="share">share</string>
     <string name="no_follower">No Follower</string>
+
+    <plurals name="follower_count">
+        <item quantity="zero">no followers</item>
+        <item quantity="one">%s follower</item>
+        <item quantity="other">%s followers</item>
+    </plurals>
+    <plurals name="following_count">
+        <item quantity="zero">no followings</item>
+        <item quantity="one">%s following</item>
+        <item quantity="other">%s followings</item>
+    </plurals>
+    <plurals name="repo_count">
+        <item quantity="zero">no public repositories</item>
+        <item quantity="one">%s public repository</item>
+        <item quantity="other">%s public repositories</item>
+    </plurals>
 </resources>
