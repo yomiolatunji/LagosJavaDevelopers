@@ -3,4 +3,5 @@
     <string name="title_item_detail">Developer Detail</string>
     <string name="transition_user_avatar">transition user avatar</string>
     <string name="share">share</string>
+    <string name="no_follower">No Follower</string>
 </resources>
