@@ -1,6 +1,6 @@
-package com.yomiolatunji.andela.lagosjavadev.data.model;
+package com.yomiolatunji.andela.lagosjavadev.data.source.local.entity;
 
-import com.yomiolatunji.andela.lagosjavadev.data.GithubItem;
+import com.yomiolatunji.andela.lagosjavadev.data.model.User;
 
 import io.realm.RealmModel;
 import io.realm.annotations.Ignore;
@@ -8,23 +8,34 @@ import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 import io.realm.annotations.Required;
 
-public class User extends GithubItem {
+@RealmClass
+public class RealmUser implements RealmModel {
 
     public int id;
+    @Required
+    @PrimaryKey
     public String login;
     public String avatarUrl;
     public String url;
     public String html_url;
     public String followers_url;
     public String following_url;
+    @Ignore
     public String gistsUrl;
+    @Ignore
     public String starred_url;
+    @Ignore
     public String subscriptions_url;
+    @Ignore
     public String organizations_url;
     public String reposUrl;
+    @Ignore
     public String eventsUrl;
+    @Ignore
     public String receivedEventsUrl;
+    @Ignore
     public String type;
+    @Ignore
     public String siteAdmin;
     public String name;
     public String company;
@@ -39,8 +50,7 @@ public class User extends GithubItem {
     public int following;
     public String createdAt;
 
-    public User(String url, int id, String login, String avatarUrl, String html_url, String followers_url, String following_url, String gistsUrl, String starred_url, String subscriptions_url, String organizations_url, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, String siteAdmin, String name, String company, String blog, String location, String email, String hireable, String bio, int publicRepos, int publicGists, int followers, int following, String createdAt) {
-        super(id, login, url);
+    public RealmUser(String url, int id, String login, String avatarUrl, String html_url, String followers_url, String following_url, String gistsUrl, String starred_url, String subscriptions_url, String organizations_url, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, String siteAdmin, String name, String company, String blog, String location, String email, String hireable, String bio, int publicRepos, int publicGists, int followers, int following, String createdAt) {
         this.id = id;
         this.login = login;
         this.avatarUrl = avatarUrl;
@@ -69,6 +79,45 @@ public class User extends GithubItem {
         this.followers = followers;
         this.following = following;
         this.createdAt = createdAt;
+    }
+
+    public RealmUser(User user) {
+        this.id = user.id;
+        this.login = user.login;
+        this.avatarUrl = user.avatarUrl;
+        this.url = user.url;
+        this.html_url = user.html_url;
+        this.followers_url = user.followers_url;
+        this.following_url = user.following_url;
+        this.gistsUrl = user.gistsUrl;
+        this.starred_url = user.starred_url;
+        this.subscriptions_url = user.subscriptions_url;
+        this.organizations_url = user.organizations_url;
+        this.reposUrl = user.reposUrl;
+        this.eventsUrl = user.eventsUrl;
+        this.receivedEventsUrl = user.receivedEventsUrl;
+        this.type = user.type;
+        this.siteAdmin = user.siteAdmin;
+        this.name = user.name;
+        this.company = user.company;
+        this.blog = user.blog;
+        this.location = user.location;
+        this.email = user.email;
+        this.hireable = user.hireable;
+        this.bio = user.bio;
+        this.publicRepos = user.publicRepos;
+        this.publicGists = user.publicGists;
+        this.followers = user.followers;
+        this.following = user.following;
+        this.createdAt = user.createdAt;
+    }
+
+    public RealmUser() {
+    }
+
+    public User toUser() {
+        return new User(url, id, login, avatarUrl, html_url, followers_url, following_url, gistsUrl, starred_url, subscriptions_url, organizations_url, reposUrl, eventsUrl, receivedEventsUrl, type, siteAdmin, name, company, blog, location, email, hireable, bio, publicRepos, publicGists, followers, following, createdAt);
+
     }
 
     public static class Builder {
@@ -241,8 +290,8 @@ public class User extends GithubItem {
             return this;
         }
 
-        public User build() {
-            return new User(url, id, login, avatarUrl, html_url, followers_url, following_url, gistsUrl, starred_url, subscriptions_url, organizations_url, reposUrl, eventsUrl, receivedEventsUrl, type, siteAdmin, name, company, blog, location, email, hireable, bio, publicRepos, publicGists, followers, following, createdAt);
+        public RealmUser build() {
+            return new RealmUser(url, id, login, avatarUrl, html_url, followers_url, following_url, gistsUrl, starred_url, subscriptions_url, organizations_url, reposUrl, eventsUrl, receivedEventsUrl, type, siteAdmin, name, company, blog, location, email, hireable, bio, publicRepos, publicGists, followers, following, createdAt);
         }
     }
 }

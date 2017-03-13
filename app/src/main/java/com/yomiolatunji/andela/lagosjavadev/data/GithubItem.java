@@ -16,11 +16,7 @@
 
 package com.yomiolatunji.andela.lagosjavadev.data;
 
-/**
- * Base class for all model types
- */
 public abstract class GithubItem {
-
     public final long id;
     public final String title;
     public String url;

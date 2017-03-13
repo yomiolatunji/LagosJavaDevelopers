@@ -2,12 +2,12 @@ package com.yomiolatunji.andela.lagosjavadev.data.adapter;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
-import android.support.v7.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +15,11 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.yomiolatunji.andela.lagosjavadev.R;
+import com.yomiolatunji.andela.lagosjavadev.data.DataLoadingSubject;
 import com.yomiolatunji.andela.lagosjavadev.data.GithubItem;
 import com.yomiolatunji.andela.lagosjavadev.data.PicassoSingleton;
-import com.yomiolatunji.andela.lagosjavadev.R;
 import com.yomiolatunji.andela.lagosjavadev.data.model.User;
-import com.yomiolatunji.andela.lagosjavadev.data.DataLoadingSubject;
 import com.yomiolatunji.andela.lagosjavadev.ui.UserDetailActivity;
 import com.yomiolatunji.andela.lagosjavadev.ui.UserDetailFragment;
 
@@ -45,7 +45,7 @@ public class LagosJavaDevsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public LagosJavaDevsAdapter(Activity hostActivity,
                                 DataLoadingSubject dataLoading, boolean isTwoPane) {
-        this.activity =  hostActivity;
+        this.activity = hostActivity;
         this.dataLoading = dataLoading;
         this.isTwoPane = isTwoPane;
         dataLoading.registerCallback(this);
@@ -81,7 +81,7 @@ public class LagosJavaDevsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private void bindUserHolder(final User user,
                                 final LagosJavaDevsHolder holder) {
-        holder.user=user;
+        holder.user = user;
         VectorDrawableCompat vectorDrawableCompat = VectorDrawableCompat.create(activity.getResources(), R.drawable.ic_person_outline, null);
 
         if (user.avatarUrl != null)
@@ -102,19 +102,19 @@ public class LagosJavaDevsAdapter extends RecyclerView.Adapter<RecyclerView.View
                     arguments.putString(UserDetailFragment.ARG_USERNAME, holder.user.login);
                     UserDetailFragment fragment = new UserDetailFragment();
                     fragment.setArguments(arguments);
-                    ((AppCompatActivity)activity).getSupportFragmentManager().beginTransaction()
+                    ((AppCompatActivity) activity).getSupportFragmentManager().beginTransaction()
                             .replace(R.id.item_detail_container, fragment)
                             .commit();
                 } else {
                     Context context = v.getContext();
                     Intent intent = new Intent(context, UserDetailActivity.class);
                     intent.putExtra(UserDetailFragment.ARG_USERNAME, holder.user.login);
-                    ActivityOptions options =null;
+                    ActivityOptions options = null;
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                         options = ActivityOptions.makeSceneTransitionAnimation((Activity) context,
                                 holder.image, context.getString(R.string.transition_user_avatar));
 
-                        context.startActivity(intent,options.toBundle());
+                        context.startActivity(intent, options.toBundle());
                     }
 
                     context.startActivity(intent);
@@ -226,10 +226,11 @@ public class LagosJavaDevsAdapter extends RecyclerView.Adapter<RecyclerView.View
         CircleImageView image;
         TextView username;
         View mView;
-User user;
+        User user;
+
         public LagosJavaDevsHolder(View itemView) {
             super(itemView);
-            mView=itemView;
+            mView = itemView;
             image = (CircleImageView) itemView.findViewById(R.id.avatar);
             username = (TextView) itemView.findViewById(R.id.username);
         }

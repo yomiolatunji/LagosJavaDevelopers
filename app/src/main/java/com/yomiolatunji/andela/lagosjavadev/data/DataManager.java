@@ -19,7 +19,8 @@ package com.yomiolatunji.andela.lagosjavadev.data;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.yomiolatunji.andela.lagosjavadev.data.api.GithubApiNetworkService;
+import com.yomiolatunji.andela.lagosjavadev.data.source.LagosJavaDevRepository;
+import com.yomiolatunji.andela.lagosjavadev.data.source.UsersDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public abstract class DataManager<T> implements DataLoadingSubject {
 
     private final AtomicInteger loadingCount;
     protected boolean moreDataAvailable = true;
-    private GithubApiNetworkService githubApiNetworkService;
+    private LagosJavaDevRepository repository;
     private int page = 0;
     private List<DataLoadingCallbacks> loadingCallbacks;
     private Context context;
@@ -64,9 +65,9 @@ public abstract class DataManager<T> implements DataLoadingSubject {
         return loadingCount.get() > 0;
     }
 
-    public GithubApiNetworkService getGithubApi() {
-        if (githubApiNetworkService == null) createGithubApi();
-        return githubApiNetworkService;
+    public LagosJavaDevRepository getRepository(UsersDataSource userRemoteDataSource,UsersDataSource userLocalDataSource,boolean isNetworkAvailable) {
+        if (repository == null) createRepository(userRemoteDataSource,userLocalDataSource,isNetworkAvailable);
+        return repository;
     }
 
     @Override
@@ -115,8 +116,8 @@ public abstract class DataManager<T> implements DataLoadingSubject {
         }
     }
 
-    private void createGithubApi() {
-        githubApiNetworkService = GithubApiNetworkService.newInstance(context);
+    private void createRepository(UsersDataSource userRemoteDataSource,UsersDataSource userLocalDataSource,boolean isNetworkAvailable) {
+        repository = LagosJavaDevRepository.getInstance(userRemoteDataSource,userLocalDataSource,isNetworkAvailable);
     }
 
 }

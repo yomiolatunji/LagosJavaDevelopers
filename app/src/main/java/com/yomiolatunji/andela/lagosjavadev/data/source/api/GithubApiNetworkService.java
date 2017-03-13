@@ -1,4 +1,4 @@
-package com.yomiolatunji.andela.lagosjavadev.data.api;
+package com.yomiolatunji.andela.lagosjavadev.data.source.api;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -7,6 +7,7 @@ import com.yomiolatunji.andela.lagosjavadev.NetworkUtils;
 import com.yomiolatunji.andela.lagosjavadev.data.DataLoadingCallback;
 import com.yomiolatunji.andela.lagosjavadev.data.OkHttpSingleton;
 import com.yomiolatunji.andela.lagosjavadev.data.model.User;
+import com.yomiolatunji.andela.lagosjavadev.data.source.UsersDataSource;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GithubApiNetworkService {
+public class GithubApiNetworkService  implements UsersDataSource {
     public static int PER_PAGE_DEFAULT = 30;
     public static int PER_PAGE_MAX = 100;
     private static Context mContext;

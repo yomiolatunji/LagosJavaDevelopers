@@ -18,18 +18,22 @@ package com.yomiolatunji.andela.lagosjavadev.data;
 
 import android.content.Context;
 
-import com.yomiolatunji.andela.lagosjavadev.data.api.GithubApiNetworkService;
+import com.yomiolatunji.andela.lagosjavadev.NetworkUtils;
+import com.yomiolatunji.andela.lagosjavadev.data.source.api.GithubApiNetworkService;
 import com.yomiolatunji.andela.lagosjavadev.data.model.User;
+import com.yomiolatunji.andela.lagosjavadev.data.source.local.LocalService;
 
 import java.util.List;
 
 public abstract class FollowersDataManager extends DataManager<List<User>> {
 
 
+    private Context context;
     private String username;
 
     public FollowersDataManager(Context context, String username) {
         super(context);
+        this.context = context;
         this.username = username;
     }
 
@@ -46,7 +50,7 @@ public abstract class FollowersDataManager extends DataManager<List<User>> {
     }
 
     private void loadUsers(final int page,String username) {
-        getGithubApi()
+        getRepository(GithubApiNetworkService.newInstance(context), LocalService.newInstance(context), NetworkUtils.isNetworkAvailable(context))
                 .getUserFollowers(username,page, GithubApiNetworkService.PER_PAGE_DEFAULT, new DataLoadingCallback<List<User>>() {
                     @Override
                     public void onResponse(List<User> users) {
